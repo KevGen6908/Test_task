@@ -7,3 +7,5 @@ on the probability of an error in the channel. The graph itself is presented bel
 
 
 The fast Fourier transform for complex values is also partially implemented, but it only works for lists of values that are multiples of two.
+
+!!!For the Fourier transform, you can prove the fftw3.h library or comment in the file main.cpp all attributes associated with it.!!!
