@@ -4,13 +4,14 @@
 
 #include "FastFourierTransform.h"
 
-void FastFourierTransform::fft(vector<complex<double>> &data, bool invert) {
+void FastFourierTransform::fft(vector<complex<double> >& data, bool invert)
+{
     int size = data.size();
-    if(size <= 1)
+    if (size <= 1)
         return;
 
-    vector<complex<double>> half1(size/2), half2(size/2);
-    for (int i = 0, j = 0; i < size; i += 2,  ++j) {
+    vector<complex<double> > half1(size / 2), half2(size / 2);
+    for (int i = 0, j = 0; i < size; i += 2, ++j) {
         half1[j] = data[i];
         half2[j] = data[i + 1];
     }
@@ -24,7 +25,7 @@ void FastFourierTransform::fft(vector<complex<double>> &data, bool invert) {
         complex<double> currentMultiplication = rootOfOne * half2[i];
         data[i] = half1[i] + currentMultiplication;
         data[i + size / 2] = half1[i] - currentMultiplication;
-        if(invert){
+        if (invert) {
             data[i] /= 2;
             data[i + size / 2] /= 2;
         }
@@ -32,8 +33,9 @@ void FastFourierTransform::fft(vector<complex<double>> &data, bool invert) {
     }
 }
 
-void FastFourierTransform::transform(vector<complex<double>>& data, int basis) {
-    //fft(data, false);
+void FastFourierTransform::transform(vector<complex<double> >& data, int basis)
+{
+
     switch (basis) {
         case 2:
             fft(data, false);
@@ -46,32 +48,27 @@ void FastFourierTransform::transform(vector<complex<double>>& data, int basis) {
     }
 }
 
-void FastFourierTransform::inverseTransform(vector<complex<double>> &data, int basis) {
+void FastFourierTransform::inverseTransform(vector<complex<double> >& data, int basis)
+{
     int size = data.size();
 
     switch (basis) {
         case 2:
             fft(data, true);
-
-            // Исправлено: деление на size, а не size / 2
             for (int i = 0; i < size; ++i) {
                 data[i] /= size;
             }
             break;
         case 3:
             fft_base3(data, true);
-
-            //data.resize(size / 3);
-
-            //for (int i = 0; i < size; ++i) {
-            //    data[i] /= size / 3;
-            //}
+            break;
+        default:
             break;
     }
-
 }
 
-static complex<double> omega(int n, int k, int N, bool invert) {
+static complex<double> omega(int n, int k, int N, bool invert)
+{
     double sign = invert ? 1.0 : -1.0;
     double angle = sign * 2.0 * M_PI * k * n / N;
     complex<double> result = polar(1.0, angle);
@@ -79,14 +76,13 @@ static complex<double> omega(int n, int k, int N, bool invert) {
     return result;
 }
 
-
-
-void FastFourierTransform::fft_base3(vector<complex<double>> &data, bool invert) {
+void FastFourierTransform::fft_base3(vector<complex<double> >& data, bool invert)
+{
     int size = data.size();
     if (size <= 1)
         return;
 
-    vector<complex<double>> half1(size / 3), half2(size / 3), half3(size / 3);
+    vector<complex<double> > half1(size / 3), half2(size / 3), half3(size / 3);
 
     for (int i = 0, j = 0; i < size; i += 3, ++j) {
         half1[j] = data[i];
@@ -122,5 +118,3 @@ void FastFourierTransform::fft_base3(vector<complex<double>> &data, bool invert)
         rootOfOne *= rotateRoot;
     }
 }
-
-
