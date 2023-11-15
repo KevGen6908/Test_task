@@ -8,6 +8,8 @@ sudo apt install libfftw3-dev
 to run .py file you need to download the library
 matplotlib.pyplot
 pip install matplotlib.pyplot
+Also in main.py the absolute path to the css file is specified
+I apologize
 
 cmake CMakeLists.txt && make && ./TestCase
 
