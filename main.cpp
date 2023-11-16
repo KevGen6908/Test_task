@@ -1,8 +1,6 @@
 
 #include <iostream>
-#include "FastFourierTransform.h"
 #include "ViterbiCodec.h"
-#include "fftw3.h"
 #include <cstdlib>
 #include <ctime>
 #include <sstream>
@@ -51,49 +49,6 @@ void write_to_csv(vector<double> porb, vector<double> arg)
 
 int main()
 {
-    //---------The problem of fast forward and inverse Fourier series decomposition of complex values-----------------------
-    cout << "---------The problem of fast forward and inverse Fourier series decomposition of complex values-----------------------" << endl;
-    vector<std::complex<double> > test{ 1, 2, 3, 4 };
-    FastFourierTransform::transform(test, 2);
-
-    int size = test.size();
-
-    auto* in = reinterpret_cast<fftw_complex*>(test.data());
-    fftw_plan plan = fftw_plan_dft_1d(size, in, in, FFTW_FORWARD, FFTW_ESTIMATE);
-    fftw_execute(plan);
-    fftw_destroy_plan(plan);
-
-    cout << "direct conversion:" << endl;
-    for (const auto& val : test) {
-        cout << val << " ";
-    }
-    cout << endl;
-
-    cout << "lib result:" << endl;
-    for (int i = 0; i < size; ++i) {
-        cout << in[i][0] << " + " << in[i][1] << "i, ";
-    }
-    cout << endl;
-
-    FastFourierTransform::inverseTransform(test, 2);
-    fftw_plan inversePlan = fftw_plan_dft_1d(size, in, in, FFTW_BACKWARD, FFTW_ESTIMATE);
-    fftw_execute(inversePlan);
-    fftw_destroy_plan(inversePlan);
-
-    cout << "inverse result:" << endl;
-    for (const auto& val : test) {
-        cout << val << " ";
-    }
-    cout << endl;
-
-    cout << "lib inverse transform:" << endl;
-    for (int i = 0; i < size; ++i) {
-        cout << in[i][0] << " + " << in[i][1] << "i, ";
-    }
-    cout << endl;
-
-    //---------------------------------Viterbi encoding and decoding--------------------------------------------------------
-
     cout << "---------------------------------Viterbi encoding and decoding--------------------------------------------------------" << endl;
 
     vector<int> poly = { 7, 5 };
