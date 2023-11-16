@@ -15,8 +15,8 @@ for i in range(len(headers)):
     plt.plot(column_data, label=headers[i])
 
 plt.legend()
-plt.xlabel('Номер строки')
-plt.ylabel('Значение')
-plt.title('График данных из CSV-файла')
+plt.xlabel(''Вероятность ошибки в канале')
+plt.ylabel('Вероятность ошибки на выходе декодера')
+plt.title('График зависимости вероятности ошибки на выходе декодера\nот вероятности ошибки в канале')
 plt.savefig('график.png')
 plt.show()
