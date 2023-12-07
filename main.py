@@ -1,22 +1,15 @@
-import csv
 import matplotlib.pyplot as plt
-filename = '/home/kevgen/CLionProjects/TestCase/cmake-build-debug/csv_arg'
 
-with open(filename, newline='') as csvfile:
-    data = list(csv.reader(csvfile))
-print(data)
+data = []
+with open('/home/kevgen/CLionProjects/Test_task/cmake-build-debug/simulation_result.txt', 'r') as file:
+    for line in file:
+        channel_error_prob, error_rate = map(float, line.split())
+        data.append((channel_error_prob, error_rate))
 
-headers = data[0]
-data = data[1:]
-
-
-for i in range(len(headers)):
-    column_data = [float(row[i]) for row in data]
-    plt.plot(column_data, label=headers[i])
-
-plt.legend()
-plt.xlabel(''Вероятность ошибки в канале')
-plt.ylabel('Вероятность ошибки на выходе декодера')
-plt.title('График зависимости вероятности ошибки на выходе декодера\nот вероятности ошибки в канале')
-plt.savefig('график.png')
+channel_error_probabilities, error_rates = zip(*data)
+plt.plot(error_rates, channel_error_probabilities)
+plt.title('The number of successes \n versus the probability of an error in the channel')
+plt.xlabel('The probability of an error in the channel')
+plt.ylabel('the probability of an error in the output')
+plt.grid(True)
 plt.show()
