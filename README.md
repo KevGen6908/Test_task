@@ -9,4 +9,5 @@ on the probability of an error in the channel. The graph itself is presented bel
 
 
 
-![image](https://github.com/KevGen6908/Test_task/assets/116305013/96479c9d-5edf-4140-9fd9-bfcb09f33703)
+![image](https://github.com/KevGen6908/Test_task/assets/116305013/5792509f-50d2-42eb-ad63-2b115a5beeb5)
+
