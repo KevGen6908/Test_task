@@ -11,3 +11,4 @@ on the probability of an error in the channel. The graph itself is presented bel
 
 ![image](https://github.com/KevGen6908/Test_task/assets/116305013/5792509f-50d2-42eb-ad63-2b115a5beeb5)
 
+The graph shows that after a probability of 25% of the noise in the channel, it is impossible to decode the message accurately.
