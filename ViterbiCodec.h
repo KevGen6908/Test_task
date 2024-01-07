@@ -12,7 +12,7 @@
 using namespace std;
 class Viterbi {
 public:
-// Витерби говно ваше ебаное!
+
     Viterbi(int constraint, const std::vector<int>& polynomials);
     std::string encode(const std::string& bits) const;
     std::string decode(const std::string& bits) const;
